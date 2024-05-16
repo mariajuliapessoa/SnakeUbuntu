@@ -6,7 +6,7 @@ It utilizes the aid of the CLI-lib to recieve inputs from the user's keyboard an
  ## Colaboradores 
 
 Isabela Spinelli  (bela975 on github) <br/>
-Maria Julia Pessoa (mariajuliapessoac on github) <br/>
+Maria Julia Pessoa (mariajuliapessoa on github) <br/>
 Nicolas Sena (nicolasSenna on github) 
 
 -------------------------------------------------------------------------------------------
