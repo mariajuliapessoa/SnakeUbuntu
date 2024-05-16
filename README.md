@@ -39,7 +39,9 @@ Para construir a interface do nosso jogo e pegar os inputs dos periféricos dos 
 contamos  com o auxílio das biblioteca cli-lib.
 
 ##OBSERVAÇÃO <br/>
-Como subimos esse código via windows para o vs code, o git ajustou para ficar de acordo com o sistema e trocou LF(Linefeed ch usado em LINUX) para CRLF(carriage return line feed ch usado em WINDOWS). certifique-se de que o seu sistema está usando o correto ao executar.
+como subimos esse código via windows para o vs code, o git ajusou para ficar de acordo com o SO e trocou o caracter LF (Linefeed ch em LINUX) para CRLF (carriage return lineFeed usado em Windows). Certifique-se de que seu sistema está usando o correto ao executar no linux.<br/>
+Não dá para executar esse jogo em windows.
+
 -------------------------------------------------------------------------------------------
 ## Como instalar a biblioteca cli-lib?
 Para utilizá-la, é necessário somente pegar os source e o header file desse repositório 
