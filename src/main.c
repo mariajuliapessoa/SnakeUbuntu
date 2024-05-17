@@ -6,7 +6,6 @@
 #include <termios.h>
 #include <fcntl.h>
 
-
 int c[300][2] = {0};
 int pontos = 1, cx = 2, cy = 2;
 int comida[2] = {0}, velo = 150;
@@ -16,7 +15,6 @@ typedef struct ranking {
     int pontos;
     struct ranking *next;
 } ranking;
-
 
 void gotoxy(int x, int y) {
     printf("\e[%d;%dH", y, x);
@@ -87,13 +85,13 @@ int kbhit() {
     return 0;
 }
 
-void addList(ranking **head, ranking *novoRanking ){
-    if (*head == NULL){
+void addList(ranking **head, ranking *novoRanking) {
+    if (*head == NULL) {
         *head = novoRanking;
         novoRanking->next = NULL;
-    }else {
+    } else {
         ranking *n = *head;
-        while(n->next != NULL && n->next->pontos > novoRanking->pontos){
+        while (n->next != NULL && n->next->pontos > novoRanking->pontos) {
             n = n->next;
         }
 
@@ -102,7 +100,7 @@ void addList(ranking **head, ranking *novoRanking ){
     }
 }
 
-ranking * getRanking(){
+ranking *getRanking() {
     char nome[25];
     ranking *novoRanking = malloc(sizeof(ranking));
 
@@ -113,18 +111,14 @@ ranking * getRanking(){
 
     novoRanking->pontos = pontos;
 
-
-
     return novoRanking;
 }
 
-void printRanking(ranking *head){
-    for( int i = 1; head != NULL; i++){
+void printRanking(ranking *head) {
+    for (int i = 1; head != NULL; i++) {
         printf("%d - %s\n", i, head->nome);
         head = head->next;
     }
-
-
 }
 
 int main() {
@@ -133,28 +127,27 @@ int main() {
     ranking *head = NULL;
     int tecla;
 
-
-    while(fim != 0){
+    while (fim != 0) {
         int gameover = 0;
 
         printf("\e[2J\e[H");
 
-        for (i = 0; i < 50; i++) { 
+        for (i = 0; i < 50; i++) {
             gotoxy(i, 0);
             printf("%c", 219);
-            usleep(5000); 
+            usleep(5000);
         }
-        for (i = 0; i < 20; i++) { 
+        for (i = 0; i < 20; i++) {
             gotoxy(50, i);
             printf("%c", 219);
             usleep(5000);
         }
-        for (i = 50; i >= 0; i--) { 
+        for (i = 50; i >= 0; i--) {
             gotoxy(i, 20);
             printf("%c", 219);
             usleep(5000);
         }
-        for (i = 20; i > 0; i--) { 
+        for (i = 20; i > 0; i--) {
             gotoxy(0, i);
             printf("%c", 219);
             usleep(5000);
@@ -177,19 +170,31 @@ int main() {
 
             if (tecla == 'w' || tecla == 'W' || tecla == 72) {
                 cy--;
-                if (cy == 0) break;
+                if (cy <= 0) {
+                    gameover = 1;
+                    break;
+                }
             }
             if (tecla == 'a' || tecla == 'A' || tecla == 75) {
                 cx--;
-                if (cx == 0) break;
+                if (cx <= 0) {
+                    gameover = 1;
+                    break;
+                }
             }
             if (tecla == 's' || tecla == 'S' || tecla == 80) {
                 cy++;
-                if (cy == 20) break;
+                if (cy >= 20) {
+                    gameover = 1;
+                    break;
+                }
             }
             if (tecla == 'd' || tecla == 'D' || tecla == 77) {
                 cx++;
-                if (cx >= 50) break;
+                if (cx >= 50) {
+                    gameover = 1;
+                    break;
+                }
             }
 
             if (cx == comida[0] && cy == comida[1]) {
@@ -207,16 +212,11 @@ int main() {
 
         ranking *novoRanking = NULL;
         novoRanking = getRanking();
-        addList(&head,novoRanking);
+        addList(&head, novoRanking);
         printRanking(head);
-
-
 
         printf("Pressione Enter para jogar novamente ou zero para sair...");
         scanf("%d", &fim);
-
-
-
     }
 
     return 0;
